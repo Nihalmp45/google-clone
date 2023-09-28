@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './Body.css'
-import { Navigate } from 'react-router-dom'
 
-const Body = () => {
+
+
+const Body = ({setSearch}) => {
 
   const [input,setInput] = useState('')
 
@@ -14,23 +15,33 @@ const Body = () => {
     window.open('https://www.google.com/doodles', '_blank')
   }
 
-  const handleSubmit =()=>{
-    if(input===''){
-      Navigate('/')
-    }else{
-      Navigate('/search') 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      /^[a-zA-Z0-9].*/.test(input) ||
+      /^[a-zA-Z0-9]+[" "]/.test(input) ||
+      /^[" "]+[a-zA-Z0-9]/.test(input)
+    ) {
+      setSearch(input.trim());
     }
-  }
-  console.log(Navigate)
+  };
+
+
   return (
     <>
     <div className='body'>
         <img className='google-image' src='Images/google-bg.png' alt='google-image'></img>
         <div className='input-wrapper'>
             <img className='mag-glass' src='Images/search.png' alt='magnifying-image'></img>
-            <form onSubmit={handleSubmit}>
-            <input type='search' value={input} onChange={(e) =>setInput(e.target.value)}/>
-            </form>
+            <form onSubmit={(e) => handleSubmit(e)}>
+                <input
+                  type="text"
+                  name="input"
+                  id="input"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </form>
             <img className='google-mic' src='Images/Google_mic.png'></img>
             <img className='google-lens' src='Images/Google_Lens.png'></img>
         </div>
