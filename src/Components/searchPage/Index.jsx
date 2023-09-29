@@ -1,22 +1,14 @@
-import { useEffect } from 'react'
 import Header from './Header'
 import Search from './Search'
-import { useNavigate } from 'react-router-dom'
 
 
+//Index page is the search result Page where header component and search component where result area is located
 
-const Index = ({searchTerm,googleData}) => {
-    const navigate = useNavigate()
-    console.log(googleData)
+const Index = ({searchTerm,googleData}) => { 
 
-    useEffect(()=>{
-        if(searchTerm === ''){
-            navigate('/')
-        }
-    },[searchTerm])
-  return (
+  return ( 
     <>
-        <Header searchTerm={searchTerm}/>
+        <Header searchTerm={searchTerm} googleData={googleData} />          
         <Search googleData={googleData}/>
         
     </>

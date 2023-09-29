@@ -9,14 +9,14 @@ import Index from './Components/searchPage/Index'
 
 function App() {
   const navigate = useNavigate()
-  const [searchTerm,setSearchTerm] = useState('')
-  const [googleData,setGoogleData] = useState({})
+  const [searchTerm,setSearchTerm] = useState('')           //searching term in the app must be passed as props to body and index page where the search results appears
+  const [googleData,setGoogleData] = useState({})           
 
-  const setSearch = async (term)=>{
+  const setSearch = async (term)=>{                        
     setSearchTerm(term)
-    const data = await searchData(term)
+    const data = await searchData(term)                //setSearch function will make the API call from googleSearch.jsx inside API folder
     setGoogleData(data)
-    navigate('/index')
+    navigate('/index')                              //Automatic redirect to index once data is set to googleData
   }
 
 
@@ -24,7 +24,8 @@ function App() {
     <>
           <Routes>
               <Route exact path='/' element={<><Navbar /><Body setSearch={setSearch}/></>} />
-              <Route exact path='/index' element={<Index searchTerm={searchTerm} googleData={googleData}/>} />
+              <Route exact path='/index' element={<Index searchTerm={searchTerm} googleData={googleData} />} />
+             
           </Routes>
     </>
   )

@@ -5,24 +5,24 @@ import './Body.css'
 
 const Body = ({setSearch}) => {
 
-  const [input,setInput] = useState('')
+  const [input,setInput] = useState('')          
 
-  const google = () =>{
-    window.open('https://www.google.com/','_blank')
+  const google = () =>{              
+    window.open('https://www.google.com/','_blank')              //google page will be opened once google image is clicked
   }
 
   const doodles = () =>{
-    window.open('https://www.google.com/doodles', '_blank')
+    window.open('https://www.google.com/doodles', '_blank')      //doodles page is opened onClick of i'm feeling lucky button
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      /^[a-zA-Z0-9].*/.test(input) ||
+      /^[a-zA-Z0-9].*/.test(input) ||            //regular expressions(regex) to prevent blank form submission
       /^[a-zA-Z0-9]+[" "]/.test(input) ||
       /^[" "]+[a-zA-Z0-9]/.test(input)
     ) {
-      setSearch(input.trim());
+      setSearch(input.trim());              //onClick of form page will be redirected by using setSearch function inside APP.jsx
     }
   };
 

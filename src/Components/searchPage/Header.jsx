@@ -1,15 +1,16 @@
 import './header.css'
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 
 
-const Header = ({searchTerm, setSearch}) => {
+const Header = ({searchTerm}) => {
+  const navigate=useNavigate()
   const [term, setTerm] = useState('');
 
-  useEffect(() => {
-    setTerm(searchTerm);
-    // eslint-disable-next-line
+  useEffect(() => {                      //on rendering of the app searchTerm is set 
+    setTerm(searchTerm);                
+    // eslint-disable-next-line        
   }, []);
 
   const clearTerm = () => {
@@ -18,19 +19,23 @@ const Header = ({searchTerm, setSearch}) => {
 
   //   handle submit
   const handleSubmit = (e) => {
-    e.preventDefault();
     handleSearch();
   };
 
+  
+
   //   handle search
   const handleSearch = () => {
-    if (
-      searchTerm !== term.trim() &&
-      (/^[a-zA-Z0-9].*/.test(term.trim()) ||
+    if ( 
+      searchTerm !== term.trim() &&                      //regular expressions(regex) to prevent blank form submission
+      (/^[a-zA-Z0-9].*/.test(term.trim()) ||                 
         /^[a-zA-Z0-9]+[" "]/.test(term.trim()) ||
         /^[" "]+[a-zA-Z0-9]/.test(term.trim()))
     ) {
       setSearch(term.trim());
+    }
+    else{
+      navigate('/')            //will be redirected back to home page on blank form submission
     }
   };
 
@@ -64,6 +69,7 @@ const Header = ({searchTerm, setSearch}) => {
                 )}
                 
               </div>
+
             </nav>
           </div>
         </div>
